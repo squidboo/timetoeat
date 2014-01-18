@@ -6,7 +6,14 @@
 exports.new = function(req, res){
   require('crypto').randomBytes(6, function(ex, buf) {
     token = buf.toString('base64').replace(/\//g,'_').replace(/\+/g,'-');
-    res.redirect(token);
+    foodlists = GLOBAL.nano.db.use('foodlists');
+    foodlists.insert({ list: token }, token, function(err, body) {
+      if (err) {
+        console.log('[foodlists.insert] ', err.message);
+        return;
+      }
+      res.redirect(token);
+    });
   });
 };
 
