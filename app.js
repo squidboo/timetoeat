@@ -31,7 +31,7 @@ if ('development' == app.get('env')) {
 
 app.get('/', routes.index);
 app.post('/new', list.new);
-app.get('/mylist', list.show);
+app.get('/:list', list.show);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

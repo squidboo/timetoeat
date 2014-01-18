@@ -4,7 +4,10 @@
  */
 
 exports.new = function(req, res){
-  res.redirect('/mylist');
+  require('crypto').randomBytes(6, function(ex, buf) {
+    token = buf.toString('base64').replace(/\//g,'_').replace(/\+/g,'-');
+    res.redirect(token);
+  });
 };
 
 /*
@@ -12,5 +15,5 @@ exports.new = function(req, res){
  */
 
 exports.show = function(req, res){
-  res.render('list', { title: 'My list' });
+  res.render('list', { title: 'My list ' + req.params.list });
 };
