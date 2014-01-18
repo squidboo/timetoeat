@@ -3,3 +3,5 @@ extends layout
 block content
   h1= title
   p Taste it don't waste it!
+  form(role='form', action='/new', method='post')
+    button.btn.btn-primary(type=submit) make a list
