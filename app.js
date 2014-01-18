@@ -12,7 +12,7 @@ var nano = require('nano');
 
 var app = express();
 
-GLOBAL.nano = nano('https://' + process.env.CLOUDANT_USER + ':' + process.env.CLOUDANT_PASS + '@jenit.cloudant.com');
+GLOBAL.nano = nano(process.env.CLOUDANT_URL);
 
 // all environments
 app.set('port', process.env.PORT || 3000);
