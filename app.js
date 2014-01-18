@@ -26,7 +26,8 @@ app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(require('stylus').middleware(path.join(process.env.PWD, 'public')));
-app.use(express.static(path.join(process.env.PWD, 'public')));
+//app.use(express.static(path.join(process.env.PWD, 'public')));
+//app.use(express.static(path.join(process.env.PWD, 'public/fonts')));
 
 // development only
 if ('development' == app.get('env')) {
