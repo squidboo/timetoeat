@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  nav.navbar.navbar-default.navbar-fixed-top
+    .container
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='mainnav')
+          span.sr-only Toggle navigation
+        a.navbar-brand(href='/') Time to Eat
+
+      #mainnav.collapse.navbar-collapse
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='/about') About
+
+  block page-content
