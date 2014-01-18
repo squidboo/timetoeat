@@ -8,8 +8,11 @@ var routes = require('./routes');
 var list = require('./routes/list');
 var http = require('http');
 var path = require('path');
+var nano = require('nano');
 
 var app = express();
+
+GLOBAL.nano = nano('https://' + process.env.CLOUDANT_USER + ':' + process.env.CLOUDANT_PASS + '@jenit.cloudant.com');
 
 // all environments
 app.set('port', process.env.PORT || 3000);
