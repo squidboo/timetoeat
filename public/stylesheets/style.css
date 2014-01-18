@@ -1,7 +1,21 @@
+@font-face {
+  font-family: "Silent Hill";
+  font-style: normal;
+  src: url("/fonts/silent_hill/SLNTHLN.ttf");
+}
+@import url("http://fonts.googleapis.com/css?family=Roboto:100,100italic,200,200italic,400,400italic,700,700italic");
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 18px;
 }
 a {
   color: #00b7ff;
+}
+.navbar-brand,
+h1,
+h2,
+h3 {
+  font-family: "Silent Hill";
 }
