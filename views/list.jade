@@ -20,7 +20,10 @@ block page-content
           button.btn.btn-primary(type=submit) add new food
 
   each items, category in food
-    .panel.panel-default
+    - if (category == 'Past Its Best') panelClass = 'panel-danger'
+    - else if (category == 'Today') panelClass = 'panel-warning'
+    - else panelClass = 'panel-success'
+    div(class='panel', class=panelClass)
       .panel-heading
         h2.panel-title= category
       table.table.table-condensed
