@@ -36,14 +36,18 @@ exports.show = function(req, res){
         return;
       }
       food = {};
+      moment = require('moment');
       body.rows.forEach(function (doc) {
-        eatby = require('isodate')(doc.value.useby);
-        today = new Date();
+        eatby = doc.value.useby;
+        today = moment().format('YYYY-MM-DD');
+        tomorrow = moment().add('days', 1).format('YYYY-MM-DD');
         category = '';
         if (eatby < today) {
           category = 'Past Its Best';
-        } else if (eatby = today) {
+        } else if (eatby == today) {
           category = 'Today';
+        } else if (eatby == tomorrow) {
+          category = 'Tomorrow';
         } else {
           category = 'Future';
         }
@@ -52,7 +56,7 @@ exports.show = function(req, res){
         }
         food[category].push(doc);
       });
-      res.render('list', { title: title, food: body.rows });
+      res.render('list', { title: title, food: food });
     });
   });
 };
