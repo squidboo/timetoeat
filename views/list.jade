@@ -23,16 +23,15 @@ block page-content
     .panel.panel-default
       .panel-heading
         h2.panel-title= category
-      .panel-body
-        ul.list-unstyled
-          each item in items
-            li
-              = item.value.name
-              = item.value.useby
-              = item.value.status
+      table.table.table-condensed
+        each item in items
+          tr
+            td.col-md-7= item.value.name
+            td.col-md-3= item.value.formattedUseby
+            td.col-md-2
               form.form-inline.row(role='form', action='', method='post')
-                button.btn.btn-primary(type=submit, name='tasted') Tasted it
-                button.btn.btn-danger(type=submit, name='wasted') Wasted it
+                button.btn.btn-sm.btn-primary(type=submit, name='tasted') Tasted it
+                button.btn.btn-sm.btn-danger(type=submit, name='wasted') Wasted it
                 input(name='_id', type='hidden' , value= item.value._id) 
 
 

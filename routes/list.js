@@ -54,6 +54,7 @@ exports.show = function(req, res){
         if (!food[category]) {
           food[category] = [];
         }
+        doc.value.formattedUseby = moment(eatby).format('ll');
         food[category].push(doc);
       });
       res.render('list', { title: title, food: food });
