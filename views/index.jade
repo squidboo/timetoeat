@@ -12,6 +12,9 @@ block content
           span.brand Time to Eat
           |  is for you!
           a.pull-right.btn.btn-default(href='/about') read more
-        form(role='form', action='/', method='post')
-          input(name='lstitle', placeholder='The name of your list')
-          button.pull-right.btn.btn-primary(type=submit) make your list
+        form.form-inline.row(role='form', action='/', method='post')
+          .form-group.col-xs-9
+            label.sr-only(for='lstitle') list name
+            input#lstitle.form-control(name='lstitle', placeholder='The name of your list')
+          .form-group.col-xs-3
+            button.btn.btn-primary(type=submit) make your list
