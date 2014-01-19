@@ -23,12 +23,16 @@ exports.new = function(req, res){
 
 exports.show = function(req, res){
   foodlists = GLOBAL.nano.db.use('foodlists');
+  food = GLOBAL.nano.db.use('food');
   foodlists.get(req.params.list, {}, function(err, body) {
     if (err) {
       console.log('[foodlists.get] ', err.message);
       return;
-    }    
-    res.render('list', { title: body.title });
+    }
+    title = body.title;
+    food.view('food', 'by_list', { keys: [req.params.list] }, function(err, body) {
+      res.render('list', { title: title, food: body.rows });
+    });
   });
 };
 

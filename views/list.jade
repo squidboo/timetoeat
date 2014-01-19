@@ -17,4 +17,8 @@ block page-content
           label.sr-only(for='eatby') Eat by
           input#eatby.form-control(name='eatby', type='date', placeholder='Eat by date', required)
         .form-group.col-md-2
-          button.btn.btn-primary(type=submit) add new food 
+          button.btn.btn-primary(type=submit) add new food
+
+  ul
+    each item in food
+      li= item.value.name 
