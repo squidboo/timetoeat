@@ -31,3 +31,18 @@ exports.show = function(req, res){
     res.render('list', { title: 'My list ' + body.title });
   });
 };
+
+/*
+ * POST /food
+ */
+
+exports.add_food = function(req, res){
+  food = GLOBAL.nano.db.use('food');
+  food.insert({ list: req.params.list, name: req.body.newfood, useby: req.body.eatby, status: 'stored' }, {}, function(err, body) {
+    if (err) {
+      console.log('[food.insert] ', err.message);
+      return;
+    }
+    res.redirect('/' + req.params.list);
+  });
+};

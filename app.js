@@ -43,6 +43,7 @@ app.get('/', routes.index);
 app.post('/', list.new);
 app.get('/about', routes.about);
 app.get('/:list', list.show);
+app.post('/:list', list.add_food);
 
 
 http.createServer(app).listen(app.get('port'), function(){
