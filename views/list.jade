@@ -4,4 +4,6 @@ block page-content
   h1= title
   p Taste it don't waste it!
   
-    
+  form(role='form', action='', method='post')
+    input(name='newfood', placeholder='The name of the new food')
+    button.pull-right.btn.btn-primary(type=submit) add new food   

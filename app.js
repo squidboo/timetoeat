@@ -40,7 +40,7 @@ app.all('*', function(req, res, next) {
 });
 
 app.get('/', routes.index);
-app.post('/new', list.new);
+app.post('/', list.new);
 app.get('/about', routes.about);
 app.get('/:list', list.show);
 
