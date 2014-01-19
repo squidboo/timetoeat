@@ -2,7 +2,16 @@ extends layout
 
 block content
   .jumbotron
-    h1= title
-    p Taste it don't waste it!
-    form(role='form', action='/new', method='post')
-      button.btn.btn-primary(type=submit) make a list
+    .row
+      .col-md-6
+        h1 Time to Eat
+        p Taste it don't waste it!
+      .col-md-6
+        p
+          | If your one of those people who loses track of what is in your cupboard and when it needs eating, then 
+          span.brand Time to Eat
+          |  is for you!
+          a.pull-right.btn.btn-default(href='/about') read more
+        form(role='form', action='/new', method='post')
+          input(name='lstitle', placeholder='The name of your list')
+          button.pull-right.btn.btn-primary(type=submit) make your list
