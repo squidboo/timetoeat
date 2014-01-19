@@ -23,14 +23,35 @@ exports.new = function(req, res){
 
 exports.show = function(req, res){
   foodlists = GLOBAL.nano.db.use('foodlists');
-  food = GLOBAL.nano.db.use('food');
+  fooddb = GLOBAL.nano.db.use('food');
   foodlists.get(req.params.list, {}, function(err, body) {
     if (err) {
       console.log('[foodlists.get] ', err.message);
       return;
     }
     title = body.title;
-    food.view('food', 'by_list', { keys: [req.params.list] }, function(err, body) {
+    fooddb.view('food', 'by_list', { keys: [req.params.list] }, function(err, body) {
+      if (err) {
+        console.log('[food/by_list] ', err.message);
+        return;
+      }
+      food = {};
+      body.rows.forEach(function (doc) {
+        eatby = require('isodate')(doc.value.useby);
+        today = new Date();
+        category = '';
+        if (eatby < today) {
+          category = 'Past Its Best';
+        } else if (eatby = today) {
+          category = 'Today';
+        } else {
+          category = 'Future';
+        }
+        if (!food[category]) {
+          food[category] = [];
+        }
+        food[category].push(doc);
+      });
       res.render('list', { title: title, food: body.rows });
     });
   });
