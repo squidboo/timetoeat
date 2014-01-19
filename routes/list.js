@@ -41,12 +41,34 @@ exports.show = function(req, res){
  */
 
 exports.add_food = function(req, res){
-  food = GLOBAL.nano.db.use('food');
-  food.insert({ list: req.params.list, name: req.body.newfood, useby: req.body.eatby, status: 'stored' }, {}, function(err, body) {
-    if (err) {
-      console.log('[food.insert] ', err.message);
-      return;
-    }
-    res.redirect('/' + req.params.list);
-  });
+  fooddb = GLOBAL.nano.db.use('food');
+  if (req.body.newfood) {
+    fooddb.insert({ list: req.params.list, name: req.body.newfood, useby: req.body.eatby, status: 'stored' }, {}, function(err, body) {
+      if (err) {
+        console.log('[food.insert] ', err.message);
+        return;
+      }
+      res.redirect('/' + req.params.list);
+    });
+  } else {
+    fooddb.get(req.body._id, function(err, body) {
+      if (err) {
+        console.log('[food.get] ', err.message);
+        return;
+      }
+      food = body;
+      if (req.body.tasted === '') {
+        food.status = 'tasted';
+      } else {
+        food.status = 'wasted';
+      }
+      fooddb.insert(food, food._id, function(err, body) {
+        if (err) {
+          console.log('[food.update] ', err.message);
+          return;
+        }
+        res.redirect('/' + req.params.list);
+      });
+    });
+  }
 };

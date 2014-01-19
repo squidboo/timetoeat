@@ -19,6 +19,16 @@ block page-content
         .form-group.col-md-2
           button.btn.btn-primary(type=submit) add new food
 
-  ul
+  ul.list-unstyled
     each item in food
-      li= item.value.name 
+      li
+        = item.value.name
+        = item.value.useby
+        = item.value.status
+        form.form-inline.row(role='form', action='', method='post')
+          button.btn.btn-primary(type=submit, name='tasted') Tasted it
+          button.btn.btn-danger(type=submit, name='wasted') Wasted it
+          input(name='_id', type='hidden' , value= item.value._id) 
+
+
+
