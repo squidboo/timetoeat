@@ -106,3 +106,37 @@ exports.add_food = function(req, res){
     });
   }
 };
+
+/*
+ * GET list statistics
+ */
+
+exports.statistics = function(req, res){
+  foodlists = GLOBAL.nano.db.use('foodlists');
+  fooddb = GLOBAL.nano.db.use('food');
+  foodlists.get(req.params.list, {}, function(err, body) {
+    if (err) {
+      console.log('[foodlists.get] ', err.message);
+      return;
+    }
+    title = body.title;
+    fooddb.view('wasted', 'by_list', { keys: [req.params.list] }, function(err, body) {
+      if (err) {
+        console.log('[wasted/by_list] ', err.message);
+        return;
+      }
+      food = {};
+      moment = require('moment');
+      body.rows.sort(function (a,b) {
+        return a.value.useby.localeCompare(b.value.useby);
+      }).forEach(function (doc) {
+        eatby = doc.value.useby;
+        if (!food[eatby]) {
+          food[eatby] = [];
+        }
+        food[eatby].push(doc);
+      });
+      res.render('statistics', { title: title, food: food });
+    });
+  });
+};

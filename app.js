@@ -44,6 +44,8 @@ app.post('/', list.new);
 app.get('/about', routes.about);
 app.get('/:list', list.show);
 app.post('/:list', list.add_food);
+app.get('/:list/statistics', list.statistics);
+
 
 
 http.createServer(app).listen(app.get('port'), function(){
