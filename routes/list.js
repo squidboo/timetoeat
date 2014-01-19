@@ -37,10 +37,14 @@ exports.show = function(req, res){
       }
       food = {};
       moment = require('moment');
-      body.rows.forEach(function (doc) {
+      body.rows.sort(function (a,b) {
+        return a.value.useby.localeCompare(b.value.useby);
+      }).forEach(function (doc) {
         eatby = doc.value.useby;
         today = moment().format('YYYY-MM-DD');
         tomorrow = moment().add('days', 1).format('YYYY-MM-DD');
+        endOfWeek = moment().add('weeks', 1).format('YYYY-MM-DD');
+        nextWeek = moment().add('weeks', 2).format('YYYY-MM-DD');
         category = '';
         if (eatby < today) {
           category = 'Past Its Best';
@@ -48,6 +52,10 @@ exports.show = function(req, res){
           category = 'Today';
         } else if (eatby == tomorrow) {
           category = 'Tomorrow';
+        } else if (eatby < endOfWeek) {
+          category = moment(eatby).format('dddd');
+        } else if (eatby < nextWeek) {
+          category = 'Next Week';
         } else {
           category = 'Future';
         }
