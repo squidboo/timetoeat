@@ -1,10 +1,20 @@
 extends page
 
 block page-content
-  h1= title
-  p Taste it don't waste it!
+  .page-header
+    h1
+      = title
+      |  
+      small Taste it don't waste it!
   
-  form(role='form', action='', method='post')
-    input(name='newfood', placeholder='The name of the new food') 
-    input(name='eatby', placeholder='Eat by date')  
-    button.btn.btn-primary(type=submit) add new food 
+  .panel.panel-default
+    .panel-body
+      form.form-inline.row(role='form', action='', method='post')
+        .form-group.col-md-8
+          label.sr-only(for='newfood') Food
+          input#newfood.form-control(name='newfood', placeholder='The name of the new food', required) 
+        .form-group.col-md-2
+          label.sr-only(for='eatby') Eat by
+          input#eatby.form-control(name='eatby', type='date', placeholder='Eat by date', required)
+        .form-group.col-md-2
+          button.btn.btn-primary(type=submit) add new food 

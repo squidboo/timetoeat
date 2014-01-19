@@ -28,7 +28,7 @@ exports.show = function(req, res){
       console.log('[foodlists.get] ', err.message);
       return;
     }    
-    res.render('list', { title: 'My list ' + body.title });
+    res.render('list', { title: body.title });
   });
 };
 
